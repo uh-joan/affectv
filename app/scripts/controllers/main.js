@@ -1,3 +1,4 @@
+(function(){
 'use strict';
 
 /**
@@ -8,10 +9,15 @@
  * Controller of the finalApp
  */
 angular.module('finalApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('MainCtrl', ['$scope','Advertiser', 'Pixel', 'lodash', function ($scope, Advertiser, Pixel, lodash) {
+
+    var vm = this;
+
+    // get all Advertisers
+    Advertiser.getAll().then(function(advertisers){
+      vm.advertisers = advertisers.data;
+    });
+
+  }]);
+
+})();
