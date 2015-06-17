@@ -29,11 +29,15 @@
           </div>
           <ul id="pixel-list" class="small-block-grid-3">
             <li ng-mouseenter="vm.getFires(pixel.id)" ng-repeat="pixel in vm.pixels | filter: vm.equals('advertiser_id', advertiser.id)"
-                ng-class="{editing: pixel == vm.editedPixel}"> {{pixel.name}}
+                ng-class="{editing: pixel == vm.editedPixel}">
 
+              <div pixely title="{{pixel.name}}" edit="vm.editPixel(pixel)" delete="vm.deletePixel(pixel)"
+                   submit="vm.doneEditing(pixel, name)" escape="vm.revertEditing(pixel)" focus="pixel == vm.editedPixel">
+                <div style="font-size: x-small;" ng-repeat="fire in vm.fires">{{fire.fires}}, {{fire.date | date:"MM/dd"}}</div>
+              </div>
             </li>
             <li>
-              <div>new pixel</div>
+              <div newpixely submit="vm.createPixel(advertiser, name)"></div>
             </li>
 
           </ul>

@@ -142,6 +142,7 @@ angular.module('finalApp')
 
     Pixel.getAll().then(function(pixels){
       vm.pixels = pixels.data;
+      vm.badges = vm.countBadge(pixels.data);
     });
 
     vm.editedPixel = null;
