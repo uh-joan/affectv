@@ -13,14 +13,20 @@ angular.module('finalApp')
 
     var vm = this;
 
+    // // //
+    // Advertisers stuff
+    // // //
+
     // get all Advertisers
     Advertiser.getAll().then(function(advertisers){
       vm.advertisers = advertisers.data;
     });
 
-    Pixel.getAll().then(function(pixels){
-      vm.pixels = pixels.data;
-    });
+    vm.equals = function(prop, val){
+      return function(item){
+        return item[prop] == val;
+      };
+    };
 
     // helper function to get an item in list from the item.name
     var isInList = function(list, item){
@@ -128,6 +134,80 @@ angular.module('finalApp')
       }, count);
 
       return lodash.countBy(count, function(n) {return n});
+    };
+
+    // // //
+    // Pixels stuff
+    // // //
+
+    Pixel.getAll().then(function(pixels){
+      vm.pixels = pixels.data;
+    });
+
+    vm.editedPixel = null;
+    vm.showDeletePixel = false;
+    vm.newPixel = {};
+    vm.showPixelInput= false;
+
+    vm.createPixel = function(advertiser, name){
+      console.log('creating pixel: '+ name + ' for '+advertiser.name);
+
+      Pixel.create({'name':name, 'advertiser_id': advertiser.id}).then(function(pixel){
+        // add to pixels list
+        vm.pixels.push(pixel);
+        vm.badges = vm.countBadge(vm.pixels);
+      }, function(error){
+        console.log(error);
+      });
+    };
+
+    vm.doneEditing = function (pixel, name) {
+      vm.editedPixel = null;
+      pixel.name = name.trim();
+
+      if (!name) {
+        vm.deletePixel(pixel);
+      } else {
+        Pixel.update(pixel).then(function(px){
+          vm.pixels[vm.pixels.indexOf(pixel)] = px;
+        }, function(error){
+          console.log(error);
+        })
+      }
+    };
+
+    vm.revertEditing = function (pixel) {
+      vm.pixels[vm.pixels.indexOf(pixel)] = vm.originalPixel;
+      //vm.doneEditing(vm.originalPixel, vm.originalPixel.name);
+    };
+
+    vm.editPixel = function (pixel) {
+      vm.editedPixel = pixel;
+      // Clone the original pixel to restore it on demand.
+      vm.originalPixel = angular.extend({}, pixel);
+    };
+
+    vm.deletePixel = function(pixel){
+      var pxFound = isInList(vm.pixels, pixel);
+      Pixel.remove(pixel).then(function(response){
+        console.log('remove px success');
+        vm.pixels.splice(pxFound.index, 1);
+        vm.badges = vm.countBadge(vm.pixels);
+      }, function(error){
+        console.log('error removing pixel');
+      });
+    };
+
+
+    // // //
+    // Fires stuff
+    // // //
+    vm.getFires = function(pixel_id){
+      Pixel.getFires(pixel_id).then(function(fires){
+        vm.fires = fires;
+      }, function(error){
+        console.log('error getting fires');
+      })
     };
 
   }]);
