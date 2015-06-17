@@ -1,8 +1,30 @@
 <div>
   <h1>Afectv Dashboard</h1>
 
-  <ul>
-    <li ng-repeat="advertiser in vm.advertisers">{{advertiser.name}}</li>
-  </ul>
+  <form id='advertiserForm' ng-submit="vm.addAdvertiser()">
+    <div class="row">
+      <div class="small-12 columns">
+        <input id="new-advertiser" type="text" placeholder="new advertiser" ng-model="vm.newAdvertiser.name"
+               ng-click="vm.toggleAdvertiserInput()" ng-keyup="$event.keyCode == 13 ? vm.addAdvertiser() : null"
+               ng-change="vm.getAdvertiser()">
+        <div ng-if="vm.showAdvertiserInput">
+          <input placeholder='address' ng-model="vm.newAdvertiser.address" ng-keyup="$event.keyCode == 13 ? vm.addAdvertiser() : null">
+          <input placeholder='city' ng-model="vm.newAdvertiser.city" ng-keyup="$event.keyCode == 13 ? vm.addAdvertiser() : null">
+          <input placeholder='postcode' ng-model="vm.newAdvertiser.post_code" ng-keyup="$event.keyCode == 13 ? vm.addAdvertiser() : null">
+          <input placeholder='telephone' ng-model="vm.newAdvertiser.tel" ng-keyup="$event.keyCode == 13 ? vm.addAdvertiser() : null">
+          <div class="button" ng-click="vm.addAdvertiser()">Submit</div>
+          <div class="button" ng-click="vm.cancelEdit()">Cancel</div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div zippy ng-repeat="advertiser in vm.advertisers" title="{{advertiser.name}}" badge="{{vm.badges[advertiser.id]}}"
+       delete="vm.removeAdvertiser(advertiser)" edit="vm.editAdvertiser(advertiser)">
+    <div>
+      {{advertiser.address}}, {{advertiser.city}}<span ng-if="advertiser.post_code">, {{advertiser.post_code}}</span><span ng-if="advertiser.tel">, {{advertiser.tel}}</span>
+    </div>
+
+  </div>
 
 </div>
