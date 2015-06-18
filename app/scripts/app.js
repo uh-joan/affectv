@@ -18,7 +18,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngLodash',
-    'mm.foundation'
+    'mm.foundation', 'ngMaterial'
   ])
   .config(function ($routeProvider) {
     $routeProvider

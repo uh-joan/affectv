@@ -58,7 +58,8 @@ angular.module('finalApp')
     var update = function(newAd){
       var deferred = $q.defer();
 
-      advertiser.update({id:newAd.id}, {'advertiser': newAd}).$promise
+      advertiser.update({id:newAd.id}, {'advertiser': {'name':newAd.name,'address':newAd.address,
+                        'city':newAd.city, 'post_code': newAd.post_code, 'tel':newAd.tel}}).$promise
         .then(function(response){
           console.log('update success');
           deferred.resolve(response);

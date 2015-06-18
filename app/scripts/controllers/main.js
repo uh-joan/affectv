@@ -76,7 +76,9 @@ angular.module('finalApp')
     // add new advertiser     };
 
     vm.addAdvertiser = function(){
+      //console.log(JSON.stringify(vm.newAdvertiser));
       var newOne = isInList(vm.advertisers, vm.newAdvertiser);
+      //console.log(JSON.stringify(newOne));
 
       // if it does not, create
       if (!newOne.item) {
@@ -89,9 +91,10 @@ angular.module('finalApp')
           console.log('deleting...');
           vm.removeAdvertiser(newOne.item);
         } else{
-          console.log('already in adv, updating');
-          console.log('updating: ' + JSON.stringify(newOne));
-          Advertiser.update(newOne.item).then(function(ad){
+          //console.log('already in adv, updating');
+          //console.log('updating: ' + JSON.stringify(newOne));
+          vm.newAdvertiser.id = newOne.item.id;
+          Advertiser.update(vm.newAdvertiser).then(function(ad){
             console.log(JSON.stringify(ad));
             vm.advertisers[newOne.index]=ad;
           });
