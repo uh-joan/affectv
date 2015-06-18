@@ -9,7 +9,6 @@
  * Service in the finalApp.
  */
 angular.module('finalApp')
-  .constant('API_URI', 'http://localhost:3000/api/v1')
 
   .service('Advertiser', ['API_URI', '$resource','$q', function (API_URI, $resource, $q) {
 

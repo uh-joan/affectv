@@ -10,7 +10,8 @@
 'use strict';
 
 angular.module('finalApp')
-  .controller('MainCtrl', ['$scope','Advertiser', 'Pixel', 'lodash', '$state', function ($scope, Advertiser, Pixel, lodash, $state) {
+  .controller('MainCtrl', ['$scope','Advertiser', 'Pixel', 'lodash', '$state',
+    function ($scope, Advertiser, Pixel, lodash, $state) {
 
     var vm = this;
 

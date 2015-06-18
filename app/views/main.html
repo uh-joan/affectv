@@ -77,10 +77,12 @@
 
                 <div pixely class="pixely" title="{{pixel.name}}" edit="vm.editPixel(pixel)" delete="vm.deletePixel(pixel)"
                      submit="vm.doneEditing(pixel, name)" escape="vm.revertEditing(pixel)" focus="pixel == vm.editedPixel">
-                  <div ng-click="vm.gotoPixels(pixel.id)" class="fires" ng-repeat="fire in vm.fires | limitTo:1">
-                    {{fire.fires}}, {{fire.date | date:"MM/dd"}}
+                  <div ng-click="vm.gotoPixels(pixel.id)">
+                    <div  class="fires" ng-repeat="fire in vm.fires | limitTo:1">
+                      {{fire.fires}}, {{fire.date | date:"MM/dd"}}
+                    </div>
+                    <div ng-if="vm.fires.length>0" class="see-more">see more...</div>
                   </div>
-                  <div ng-if="vm.fires.length>0" class="see-more">see more...</div>
                 </div>
               </li>
               <li>

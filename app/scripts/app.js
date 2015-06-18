@@ -22,6 +22,10 @@ angular
     'ngMaterial',
     'ui.router'
   ])
+
+  //.constant('API_URI', 'http://localhost:3000/api/v1')
+  .constant('API_URI', 'https://aqueous-island-8665.herokuapp.com/api/v1')
+
   .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
