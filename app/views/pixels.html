@@ -1,0 +1,28 @@
+<div id="main">
+
+
+  <div class="row">
+    <div class="small-8 small-offset-2 medium-10 medium-offset-1">
+
+      <div class="row">
+        <div class="small-2 columns">
+          <md-button  ng-click="vm.goBack()" class="md-fab md-primary back-button" aria-label="back">
+            <!--<md-icon md-svg-src="your/icon.svg"><i class="fa fa-bed"></i></md-icon>-->
+            <md-icon alt="add" ><span style="position: relative; top: -22px;font-size: 48px;left:-2px;"><strong> &lt </strong></span></md-icon>
+          </md-button>
+        </div>
+        <div class="small-10 columns">
+          <h2>Fires for {{vm.pixel.name}}</h2>
+        </div>
+      </div>
+      {{vm.fires | json}}
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+

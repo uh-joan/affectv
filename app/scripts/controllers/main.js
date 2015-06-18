@@ -1,6 +1,3 @@
-(function(){
-'use strict';
-
 /**
  * @ngdoc function
  * @name finalApp.controller:MainCtrl
@@ -8,8 +5,12 @@
  * # MainCtrl
  * Controller of the finalApp
  */
+
+(function(){
+'use strict';
+
 angular.module('finalApp')
-  .controller('MainCtrl', ['$scope','Advertiser', 'Pixel', 'lodash', function ($scope, Advertiser, Pixel, lodash) {
+  .controller('MainCtrl', ['$scope','Advertiser', 'Pixel', 'lodash', '$state', function ($scope, Advertiser, Pixel, lodash, $state) {
 
     var vm = this;
 
@@ -233,8 +234,12 @@ angular.module('finalApp')
     };
 
     vm.cleanFires = function() {
-      vm.fires = {};
+      vm.fires = null;
     };
+
+    vm.gotoPixels = function(id){
+      $state.go('aside.pixels', { id : id });
+    }
 
   }]);
 

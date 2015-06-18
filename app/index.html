@@ -18,7 +18,8 @@
   </head>
   <body ng-app="finalApp">
 
-    <div ng-view=""></div>
+    <!--<div ng-view=""></div>-->
+    <div ui-view class="learn-bar"></div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -40,6 +41,7 @@
     <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -53,6 +55,8 @@
         <script src="scripts/directives/pixelfocus.js"></script>
         <script src="scripts/directives/pixely.js"></script>
         <script src="scripts/directives/newpixely.js"></script>
+        <script src="scripts/controllers/pixels.js"></script>
+        <script src="scripts/controllers/aside.js"></script>
         <!-- endbuild -->
 </body>
 </html>

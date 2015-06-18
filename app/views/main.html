@@ -3,7 +3,7 @@
   <h1>Affectv Dashboard</h1>
 
   <div class="row">
-    <div class="small-10 small-offset-1">
+    <div class="small-8 small-offset-2 medium-10 medium-offset-1">
 
       <form novalidate id='advertiser-form' >
         <div class="row">
@@ -57,7 +57,7 @@
 
 
   <div ng-class="{'down-advertisers' : vm.showAdvertiserInput}" class="row">
-    <div class="small-10 small-offset-1">
+    <div class="small-8 small-offset-2 medium-10 medium-offset-1">
 
       <dl id="advertiser-list">
 
@@ -77,7 +77,10 @@
 
                 <div pixely class="pixely" title="{{pixel.name}}" edit="vm.editPixel(pixel)" delete="vm.deletePixel(pixel)"
                      submit="vm.doneEditing(pixel, name)" escape="vm.revertEditing(pixel)" focus="pixel == vm.editedPixel">
-                  <div class="fires" ng-repeat="fire in vm.fires">{{fire.fires}}, {{fire.date | date:"MM/dd"}}</div>
+                  <div ng-click="vm.gotoPixels(pixel.id)" class="fires" ng-repeat="fire in vm.fires | limitTo:1">
+                    {{fire.fires}}, {{fire.date | date:"MM/dd"}}
+                  </div>
+                  <div ng-if="vm.fires.length>0" class="see-more">see more...</div>
                 </div>
               </li>
               <li>

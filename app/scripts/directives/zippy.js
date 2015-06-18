@@ -16,8 +16,8 @@ angular.module('finalApp')
       '<div class="small-3 medium-2 columns"></div>' +
       '<div class="small-3 medium-2 columns" ng-show="!showHover"></div>' +
       '<div class="small-3 medium-2 columns commands" ng-show="showHover"> ' +
-      '<span ng-click="edit();noToggle();"> edit |</span>' +
-      '<span ng-click="delete();noToggle();">| delete</span>  ' +
+      '<span ng-click="edit();noToggle();">edit</span>' +
+      '<span ng-click="delete();noToggle();">&nbspdelete</span>  ' +
       '</div>' +
       '</div>' +
       '<dd ng-if="isContentVisible" ng-transclude></dd>' +

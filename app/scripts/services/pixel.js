@@ -92,12 +92,25 @@
         return deferred.promise;
       };
 
+      var get = function(pixel_id){
+        var deferred = $q.defer();
+
+        pixel.get({'id': pixel_id}).$promise
+          .then(function(response){
+            deferred.resolve(response.data);
+          }, function(error){
+            deferred.reject(error);
+          });
+        return deferred.promise;
+      };
+
       return {
         getAll: getAll,
         create: create,
         update: update,
         remove: remove,
-        getFires: getFires
+        getFires: getFires,
+        get: get
       };
     }]);
 })();
