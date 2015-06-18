@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc directive
  * @name finalApp.directive:pixely
@@ -8,6 +6,7 @@
  */
 angular.module('finalApp')
   .directive('pixely', [ '$timeout', function ($timeout) {
+    'use strict';
     return {
       template: '<div class="pixel-box" ng-dblclick="edit();editingOn();" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">' +
       '<label class="view title">{{title}}' +

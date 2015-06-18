@@ -24,7 +24,7 @@ angular.module('finalApp')
 
     vm.equals = function(prop, val){
       return function(item){
-        return item[prop] == val;
+        return item[prop] === val;
       };
     };
 
@@ -50,8 +50,8 @@ angular.module('finalApp')
       var advertiser = isInList(vm.advertisers, vm.newAdvertiser);
 
       if (!advertiser.item) {
-        vm.newAdvertiser.city="";vm.newAdvertiser.address="";
-        vm.newAdvertiser.post_code="";vm.newAdvertiser.tel="";
+        vm.newAdvertiser.city='';vm.newAdvertiser.address='';
+        vm.newAdvertiser.post_code='';vm.newAdvertiser.tel='';
       } else {
         vm.newAdvertiser.city=vm.advertisers[advertiser.index].city;vm.newAdvertiser.address=vm.advertisers[advertiser.index].address;
         vm.newAdvertiser.post_code=vm.advertisers[advertiser.index].post_code;vm.newAdvertiser.tel=vm.advertisers[advertiser.index].tel;
@@ -70,6 +70,7 @@ angular.module('finalApp')
 
 
     vm.cancelEdit = function (){
+      console.log('on cancel');
       vm.showAdvertiserInput = false;
       vm.newAdvertiser = null;
     };
@@ -77,32 +78,49 @@ angular.module('finalApp')
 
     vm.addAdvertiser = function(){
       //console.log(JSON.stringify(vm.newAdvertiser));
-      var newOne = isInList(vm.advertisers, vm.newAdvertiser);
-      //console.log(JSON.stringify(newOne));
 
-      // if it does not, create
-      if (!newOne.item) {
-        console.log('not in adv, new one');
-        Advertiser.create(vm.newAdvertiser).then(function(ad){
-          vm.advertisers.push(ad);
-        });
-      } else { // if it does, update
-        if (!newOne.item.name){ //empty name deletes it
-          console.log('deleting...');
-          vm.removeAdvertiser(newOne.item);
-        } else{
-          //console.log('already in adv, updating');
-          //console.log('updating: ' + JSON.stringify(newOne));
-          vm.newAdvertiser.id = newOne.item.id;
-          Advertiser.update(vm.newAdvertiser).then(function(ad){
-            console.log(JSON.stringify(ad));
-            vm.advertisers[newOne.index]=ad;
-          });
+      if(vm.newAdvertiser){
+        var newOne = isInList(vm.advertisers, vm.newAdvertiser);
+        //console.log(JSON.stringify(newOne));
+
+        console.log('in add adv');
+        // if it does not, create
+        if (!newOne.item) {
+
+          if (vm.newAdvertiser.name) {
+            console.log('not in adv, new one');
+            Advertiser.create(vm.newAdvertiser).then(function(ad){
+              vm.advertisers.push(ad);
+            });
+            vm.newAdvertiser = {};
+            // toggle input adv
+            vm.showAdvertiserInput = !vm.showAdvertiserInput;
+          } else {
+            console.log('ignore adv with empty name');
+          }
+        } else { // if it does, update
+          if (!newOne.item.name){ //empty name deletes it
+            console.log('deleting...');
+            vm.removeAdvertiser(newOne.item);
+            vm.newAdvertiser = {};
+            // toggle input adv
+            vm.showAdvertiserInput = !vm.showAdvertiserInput;
+          } else{
+            //console.log('already in adv, updating');
+            //console.log('updating: ' + JSON.stringify(newOne));
+            vm.newAdvertiser.id = newOne.item.id;
+            Advertiser.update(vm.newAdvertiser).then(function(ad){
+              console.log(JSON.stringify(ad));
+              vm.advertisers[newOne.index]=ad;
+            });
+            vm.newAdvertiser = {};
+            // toggle input adv
+            vm.showAdvertiserInput = !vm.showAdvertiserInput;
+          }
         }
+
       }
-      vm.newAdvertiser = {};
-      // toggle input adv
-      vm.showAdvertiserInput = !vm.showAdvertiserInput;
+
     };
 
     vm.removeAdvertiser = function(advertiser) {
@@ -111,7 +129,7 @@ angular.module('finalApp')
         Advertiser.remove(advertiser).then(function () {
           console.log('remove success');
           vm.advertisers.splice(adFound.index, 1);
-        }, function (error) {
+        }, function () {
           console.log('error deleting adv');
         });
 
@@ -136,7 +154,7 @@ angular.module('finalApp')
         this[key]=value;
       }, count);
 
-      return lodash.countBy(count, function(n) {return n});
+      return lodash.countBy(count, function(n) {return n;});
     };
 
     // // //
@@ -176,7 +194,7 @@ angular.module('finalApp')
           vm.pixels[vm.pixels.indexOf(pixel)] = px;
         }, function(error){
           console.log(error);
-        })
+        });
       }
     };
 
@@ -193,11 +211,11 @@ angular.module('finalApp')
 
     vm.deletePixel = function(pixel){
       var pxFound = isInList(vm.pixels, pixel);
-      Pixel.remove(pixel).then(function(response){
+      Pixel.remove(pixel).then(function(){
         console.log('remove px success');
         vm.pixels.splice(pxFound.index, 1);
         vm.badges = vm.countBadge(vm.pixels);
-      }, function(error){
+      }, function(){
         console.log('error removing pixel');
       });
     };
@@ -209,9 +227,13 @@ angular.module('finalApp')
     vm.getFires = function(pixel_id){
       Pixel.getFires(pixel_id).then(function(fires){
         vm.fires = fires;
-      }, function(error){
+      }, function(){
         console.log('error getting fires');
-      })
+      });
+    };
+
+    vm.cleanFires = function() {
+      vm.fires = {};
     };
 
   }]);

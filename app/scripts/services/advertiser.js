@@ -75,7 +75,7 @@ angular.module('finalApp')
 
       advertiser.remove({id: ad.id}).$promise
         .then(function(){
-          deferred.resolve()
+          deferred.resolve();
         }, function(){
           deferred.reject();
         });
@@ -88,7 +88,7 @@ angular.module('finalApp')
       create: create,
       update : update,
       remove: remove
-    }
+    };
 
   }]);
 })();

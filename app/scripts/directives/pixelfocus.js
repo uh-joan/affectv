@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc directive
  * @name finalApp.directive:pixelFocus
@@ -23,5 +21,5 @@ angular.module('finalApp')
         //  console.log('focus on');
         //});
       });
-    }
+    };
   }]);

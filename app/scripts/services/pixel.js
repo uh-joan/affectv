@@ -71,9 +71,9 @@
         var deferred = $q.defer();
 
         pixel.remove({id: px.id}).$promise
-          .then(function(response){
-            deferred.resolve()
-          }, function(error){
+          .then(function(){
+            deferred.resolve();
+          }, function(){
             deferred.reject();
           });
 

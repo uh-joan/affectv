@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc directive
  * @name finalApp.directive:newpixely
@@ -8,10 +6,11 @@
  */
 angular.module('finalApp')
   .directive('newpixely',['$timeout', function ($timeout) {
+    'use strict';
     return {
       template: '<form ng-submit="submit({name:name});clearInput();">' +
       '<input ng-cloak ng-show="showInput" ng-blur="hideInput()" pixel-focus="showInput" placeholder="pixel name" ng-model="name" pixel-escape="clearInput()">' +
-      '<p ng-cloak ng-show="!showInput" ng-click="toggleInput()">add new pixel + </p>' +
+      '<p style="font-size: small;" ng-cloak ng-show="!showInput" ng-click="toggleInput()">add new pixel + </p>' +
       '</form>',
       restrict: 'A',
       scope: {
@@ -23,13 +22,13 @@ angular.module('finalApp')
           scope.showInput = !scope.showInput;
         };
         scope.clearInput = function(){
-          scope.name = "";
+          scope.name = '';
           scope.toggleInput();
         };
         scope.hideInput = function(){
-          scope.name="";
+          scope.name='';
           scope.showInput=false;
-        }
+        };
       }
     };
   }]);

@@ -54,7 +54,7 @@ angular.module('finalApp')
 
         scope.noToggle = function (){
           scope.noContent = true;
-        }
+        };
       }
     };
   });
