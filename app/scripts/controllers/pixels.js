@@ -33,28 +33,5 @@
 
         vm.firesToPlot = vm.getData();
 
-      //  vm.setSubject = function(subject){
-      //    vm.chartData = vm.subjects[subject];
-      //    console.log('chartData: '+ vm.chartData);
-      //  };
-      //
-      //$http.get('http://jsbin.com/vegaqi/1.js')
-      //  .then(function (result) {
-      //    //console.log(JSON.stringify(result.data));
-      //    vm.subjects = result.data;
-      //
-      //    lodash.keys(vm.subjects).forEach(function (subject) {
-      //      console.log('subject: '+ subject);
-      //      vm.subjects[subject].forEach(function (d) {
-      //        d.date = d3.time.format("%Y%m%d").parse(d.date);
-      //      });
-      //    });
-      //  })
-      //  .then(function () {
-      //    vm.setSubject('math');
-      //  });
-
-
-
     }]);
 })();

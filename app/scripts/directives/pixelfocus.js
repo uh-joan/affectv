@@ -17,9 +17,9 @@ angular.module('finalApp')
             elem[0].focus();
           }, 0, false);
         }
-        //elem.bind('focus', function() {
-        //  console.log('focus on');
-        //});
+        elem.bind('focus', function() {
+          console.log('focus on');
+        });
       });
     };
   }]);
