@@ -22,16 +22,16 @@
         $state.go('aside.main');
       };
 
-        vm.getData = function(){
-          var fires=[];
-          angular.forEach(vm.fires, function(fire){
-            fires.push({'fires': fire.fires, 'date': fire.date});
-          }, fires);
-          console.log(JSON.stringify(fires));
-          return fires;
-        };
+      vm.getData = function(){
+        var fires=[];
+        angular.forEach(vm.fires, function(fire){
+          fires.push({'fires': fire.fires, 'date': fire.date});
+        }, fires);
+        console.log(JSON.stringify(fires));
+        return fires;
+      };
 
-        vm.firesToPlot = vm.getData();
+      vm.firesToPlot = vm.getData();
 
     }]);
 })();

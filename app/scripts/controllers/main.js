@@ -70,7 +70,6 @@ angular.module('finalApp')
       }
     };
 
-
     vm.cancelEdit = function (){
       console.log('on cancel');
       vm.showAdvertiserInput = false;

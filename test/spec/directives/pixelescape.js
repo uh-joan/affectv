@@ -13,7 +13,7 @@ describe('Directive: pixelEscape', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<pixel-escape></pixel-escape>');
+    element = angular.element('<div pixel-escape></div>');
     element = $compile(element)(scope);
     expect(element.text()).toBe('this is the pixelEscape directive');
   }));

@@ -13,7 +13,7 @@ describe('Directive: areaChart', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<area-chart></area-chart>');
+    element = angular.element('<div area-chart></div>');
     element = $compile(element)(scope);
     expect(element.text()).toBe('this is the areaChart directive');
   }));

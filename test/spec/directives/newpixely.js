@@ -13,7 +13,7 @@ describe('Directive: newpixely', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<newpixely></newpixely>');
+    element = angular.element('<div newpixely></divy>');
     element = $compile(element)(scope);
     expect(element.text()).toBe('this is the newpixely directive');
   }));

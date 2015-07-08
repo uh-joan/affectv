@@ -13,7 +13,7 @@ describe('Directive: zippy', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<zippy></zippy>');
+    element = angular.element('<div zippy></div>');
     element = $compile(element)(scope);
     expect(element.text()).toBe('this is the zippy directive');
   }));
